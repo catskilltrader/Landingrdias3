@@ -4,53 +4,112 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rafael Dias · Assessoria Privada XP</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
   <style>
+    /* ====================================================
+       VARIÁVEIS GLOBAIS
+    ==================================================== */
     :root {
-      --bg: #0a0a0a;
-      --surface: #111111;
-      --border: #222222;
-      --gold: #c9a84c;
-      --gold-soft: rgba(201,168,76,.12);
-      --text: #e8e8e8;
-      --muted: #888888;
-      --white: #ffffff;
+      --bg:          #0a0a0a;
+      --surface:     #111111;
+      --border:      #222222;
+      --gold:        #c9a84c;
+      --gold-soft:   rgba(201,168,76,.12);
+      --text:        #e8e8e8;
+      --muted:       #888888;
+      --white:       #ffffff;
       --font-display: 'Cormorant Garamond', serif;
-      --font-body: 'DM Sans', sans-serif;
+      --font-body:    'DM Sans', sans-serif;
       --max-width: 680px;
       --gap: clamp(4rem, 8vw, 7rem);
+
+      /* =============================================
+         TAMANHOS AJUSTÁVEIS — edite aqui
+         ============================================= */
+      --selo-size: 237px;       /* largura do selo no hero */
+      --banner-max-width:30%; /* largura máxima do banner de prêmios:
+                                   use % para relativo à tela,
+                                   ou px para fixo, ex: 900px */
     }
+
+    /* ====================================================
+       RESET & BASE
+    ==================================================== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-weight: 300; font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+
+    /* ====================================================
+       UTILITÁRIOS
+    ==================================================== */
     .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
     .section { padding: var(--gap) 0; }
     .label { font-family: var(--font-body); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
     h1, h2, h3 { font-family: var(--font-display); font-weight: 300; line-height: 1.15; }
     a { color: inherit; text-decoration: none; }
     .divider { width: 40px; height: 1px; background: var(--gold); margin: 2rem 0; }
+
+    /* ====================================================
+       NAVBAR
+    ==================================================== */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.2rem 1.5rem; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, rgba(10,10,10,.95), transparent); backdrop-filter: blur(6px); }
     .nav-logo { font-family: var(--font-display); font-size: 1.05rem; letter-spacing: 0.04em; color: var(--white); }
     .nav-logo span { color: var(--gold); }
     .nav-cta { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold); padding: 0.45rem 1rem; border-radius: 2px; transition: background .2s, color .2s; }
     .nav-cta:hover { background: var(--gold); color: var(--bg); }
+
+    /* ====================================================
+       HERO
+    ==================================================== */
     #hero { min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: clamp(3rem, 8vw, 5rem); padding-top: 6rem; position: relative; overflow: hidden; }
     #hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(201,168,76,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,.03) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
     #hero::after { content: ''; position: absolute; top: -10%; right: -10%; width: 55vw; height: 55vw; background: radial-gradient(circle, rgba(201,168,76,.07) 0%, transparent 70%); pointer-events: none; }
+
     .hero-kicker { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
     .hero-kicker::before { content: ''; display: inline-block; width: 28px; height: 1px; background: var(--gold); }
     .hero-title { font-size: clamp(2.8rem, 9vw, 5rem); color: var(--white); margin-bottom: 1.5rem; }
     .hero-title em { font-style: italic; color: var(--gold); }
     .hero-sub { color: var(--muted); font-size: 1rem; max-width: 420px; margin-bottom: 2.5rem; line-height: 1.8; }
-    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* Linha de botões + selo lado a lado */
+    .hero-bottom-row {
+      display: flex;
+      align-items: center;
+      gap: 1.8rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    /* Selo ao lado dos botões — ajuste --selo-size em :root */
+    .hero-seal {
+      width: var(--selo-size);
+      height: auto;
+      flex-shrink: 0;
+      opacity: 0.92;
+      filter: drop-shadow(0 0 16px rgba(201,168,76,.3));
+    }
+
     .btn-primary { display: inline-block; background: var(--gold); color: var(--bg); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.9rem 2rem; border-radius: 2px; transition: opacity .2s, transform .2s; }
     .btn-primary:hover { opacity: .85; transform: translateY(-1px); }
     .btn-ghost { display: inline-block; color: var(--muted); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.9rem 0; border-bottom: 1px solid var(--border); transition: color .2s, border-color .2s; }
     .btn-ghost:hover { color: var(--gold); border-color: var(--gold); }
+
     .xp-badge { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--surface); border: 1px solid var(--border); border-radius: 30px; padding: 0.45rem 1rem 0.45rem 0.45rem; font-size: 0.72rem; color: var(--muted); margin-top: 3rem; }
     .xp-dot { width: 28px; height: 28px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 0.6rem; font-weight: 600; color: var(--bg); letter-spacing: 0.05em; flex-shrink: 0; }
+
+    /* ====================================================
+       DIFERENCIAIS
+    ==================================================== */
     #diferenciais { background: var(--surface); }
     .features-grid { display: flex; flex-direction: column; gap: 0; }
     .feature-item { display: flex; gap: 1.2rem; align-items: flex-start; padding: 1.4rem 0; border-bottom: 1px solid var(--border); opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; }
@@ -58,6 +117,10 @@
     .feature-item:last-child { border-bottom: none; }
     .feature-num { font-family: var(--font-display); font-size: 0.75rem; color: var(--gold); min-width: 28px; padding-top: 0.15rem; font-weight: 300; }
     .feature-text { font-size: 0.92rem; color: var(--text); line-height: 1.6; }
+
+    /* ====================================================
+       TAXAS
+    ==================================================== */
     #taxas h2 { font-size: clamp(1.8rem, 6vw, 2.8rem); margin-bottom: 0.5rem; }
     .taxas-intro { color: var(--muted); font-size: 0.9rem; margin-bottom: 2.5rem; }
     .taxa-card { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 0.8rem; }
@@ -67,6 +130,10 @@
     .taxa-faixa { color: var(--muted); }
     .taxa-valor { font-weight: 500; color: var(--gold); font-family: var(--font-display); font-size: 1rem; }
     .cashback-note { font-size: 0.8rem; color: var(--muted); border-left: 2px solid var(--gold); padding-left: 1rem; margin-top: 1.5rem; line-height: 1.6; }
+
+    /* ====================================================
+       FAQ
+    ==================================================== */
     #faq h2 { font-size: clamp(1.8rem, 6vw, 2.8rem); margin-bottom: 2.5rem; }
     .faq-item { border-bottom: 1px solid var(--border); }
     .faq-question { width: 100%; background: none; border: none; text-align: left; color: var(--text); font-family: var(--font-body); font-size: 0.92rem; font-weight: 400; padding: 1.2rem 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
@@ -79,6 +146,10 @@
     .steps { list-style: none; margin-top: 0.5rem; }
     .steps li { display: flex; gap: 0.8rem; margin-bottom: 0.5rem; }
     .step-num { color: var(--gold); font-family: var(--font-display); font-size: 0.8rem; min-width: 20px; }
+
+    /* ====================================================
+       CONTATO
+    ==================================================== */
     #contato { background: var(--surface); }
     #contato h2 { font-size: clamp(1.8rem, 6vw, 2.8rem); margin-bottom: 0.5rem; }
     .contact-sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 2.5rem; }
@@ -91,37 +162,94 @@
     .btn-submit:hover { opacity: .85; transform: translateY(-1px); }
     .form-success { display: none; text-align: center; padding: 2rem 0; }
     .form-success .check { width: 48px; height: 48px; border-radius: 50%; background: var(--gold-soft); border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.2rem; color: var(--gold); }
+
+    /* ====================================================
+       BANNER DE PRÊMIOS — ajuste --banner-max-width em :root
+    ==================================================== */
+    #premios {
+      padding: 0;
+      line-height: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    #premios img {
+      width: var(--banner-max-width);
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ====================================================
+       FOOTER
+    ==================================================== */
     footer { padding: 3rem 1.5rem; text-align: center; border-top: 1px solid var(--border); }
     .footer-logo { font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--white); }
     .footer-logo span { color: var(--gold); }
     .footer-legal { font-size: 0.72rem; color: var(--muted); line-height: 1.8; max-width: 420px; margin: 0.5rem auto 0; }
+
+    /* ====================================================
+       SCROLL REVEAL
+    ==================================================== */
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
     .reveal.visible { opacity: 1; transform: none; }
+
+    @media (min-width: 600px) {
+      .hero-title { font-size: clamp(3.5rem, 7vw, 5.5rem); }
+    }
   </style>
 </head>
 <body>
 
+  <!-- NAVEGAÇÃO -->
   <nav>
     <div class="nav-logo">Rafael <span>Dias</span></div>
     <a href="#contato" class="nav-cta">Fale conosco</a>
   </nav>
 
+
+  <!-- HERO -->
   <section id="hero">
     <div class="container">
+
       <div class="hero-kicker">Assessoria Privada XP</div>
-      <h1 class="hero-title">Invista com quem<br>pensa <em>diferente.</em></h1>
-      <p class="hero-sub">Estratégias sob medida, sem conflitos de interesse e com transparência total em cada decisão.</p>
-      <div class="hero-actions">
-        <a href="#contato" class="btn-primary">Quero ser atendido</a>
-        <a href="#diferenciais" class="btn-ghost">Ver diferenciais</a>
+
+      <h1 class="hero-title">
+        Invista com quem<br>
+        pensa <em>diferente.</em>
+      </h1>
+
+      <p class="hero-sub">
+        Estratégias sob medida, sem conflitos de interesse
+        e com transparência total em cada decisão.
+      </p>
+
+      <!-- Botões + Selo lado a lado -->
+      <div class="hero-bottom-row">
+
+        <div class="hero-actions">
+          <a href="#contato" class="btn-primary">Quero ser atendido</a>
+          <a href="#diferenciais" class="btn-ghost">Ver diferenciais</a>
+        </div>
+
+        <!-- Selo de Excelência XP — tamanho controlado por --selo-size em :root -->
+        <img
+          class="hero-seal"
+          src="https://github.com/catskilltrader/Landingrdias3/blob/main/Selo%20PNG.png?raw=true"
+          alt="Selo de Excelência XP"
+        />
+
       </div>
+
       <div class="xp-badge">
         <div class="xp-dot">XP</div>
         Um dos maiores escritórios privados da XP · +R$30 Bi sob gestão
       </div>
+
     </div>
   </section>
 
+
+  <!-- DIFERENCIAIS -->
   <section id="diferenciais" class="section">
     <div class="container">
       <div class="label reveal">O que você recebe</div>
@@ -140,6 +268,8 @@
     </div>
   </section>
 
+
+  <!-- TAXAS -->
   <section id="taxas" class="section">
     <div class="container">
       <div class="label reveal">Transparência total</div>
@@ -158,11 +288,14 @@
     </div>
   </section>
 
+
+  <!-- FAQ -->
   <section id="faq" class="section" style="background:var(--surface);">
     <div class="container">
       <div class="label reveal">Dúvidas frequentes</div>
       <h2 class="reveal">Perguntas<br>frequentes.</h2>
       <div class="divider reveal"></div>
+
       <div class="faq-item">
         <button class="faq-question">Como é cobrado o serviço?<span class="faq-icon">+</span></button>
         <div class="faq-answer"><div class="faq-answer-inner">A taxa é descontada diretamente do retorno da carteira, sem nenhum custo adicional ao bolso. Não há carência — você pode cancelar o serviço a qualquer momento, sem burocracia.</div></div>
@@ -173,7 +306,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-question">Quem é o assessor responsável?<span class="faq-icon">+</span></button>
-        <div class="faq-answer"><div class="faq-answer-inner"><strong style="color:var(--text);">Rafael Dias</strong> é graduado pela Universidade Federal de Lavras, com MBA em Investimentos & Private Banking pelo IBMEC. É Especialista em Investimentos credenciado (CEA) e Assessor de Investimentos autorizado pela CVM.</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner"><strong style="color:var(--text);">Rafael Dias</strong> é graduado pela Universidade Federal de Lavras, com MBA em Investimentos & Private Banking pelo IBMEC. É Especialista em Investimentos credenciado (CEA) e Assessor de Investimentos autorizado pela CVM. Atua em equipe com profissionais experientes nas áreas de planejamento financeiro pessoal e familiar.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-question">Preciso ter conta na XP?<span class="faq-icon">+</span></button>
@@ -191,34 +324,37 @@
           </ul>
         </div></div>
       </div>
+
     </div>
   </section>
 
+
+  <!-- CONTATO -->
   <section id="contato" class="section">
     <div class="container">
       <div class="label reveal">Primeiro passo</div>
       <h2 class="reveal">Vamos conversar<br>sobre o seu patrimônio.</h2>
       <div class="divider reveal"></div>
       <p class="contact-sub reveal">Preencha os dados abaixo e entraremos em contato para uma reunião de diagnóstico, sem custos.</p>
+
       <form id="contactForm">
         <div class="form-group reveal"><label for="nome">Nome completo</label><input type="text" id="nome" name="nome" placeholder="Seu nome" required /></div>
         <div class="form-group reveal"><label for="profissao">Profissão</label><input type="text" id="profissao" name="profissao" placeholder="Sua profissão" /></div>
         <div class="form-group reveal">
           <label for="faixa">Faixa de investimentos</label>
           <select id="faixa" name="faixa" required>
-            <option value="" disabled selected>Selecione uma faixa de patrimônio</option>
+            <option value="" disabled selected>Selecione uma faixa</option>
             <option>Até R$ 100 mil</option>
-            <option>De R$ 100 mil a R$ 300 mil</option>
-            <option>De R$ 300 mil a R$ 1 milhão</option>
-            <option>De R$ 1 a R$ 5 milhões</option>
-            <option>De R$ 5 a R$ 10 milhões</option>
-             <option>Acima de R$ 10 milhões</option>
+            <option>De R$ 100k a R$ 300k</option>
+            <option>De R$ 300k a R$ 5 milhões</option>
+            <option>Acima de R$ 5 milhões</option>
           </select>
         </div>
         <div class="form-group reveal"><label for="email">E-mail</label><input type="email" id="email" name="email" placeholder="seu@email.com" required /></div>
         <div class="form-group reveal"><label for="whatsapp">WhatsApp</label><input type="tel" id="whatsapp" name="whatsapp" placeholder="(00) 00000-0000" required /></div>
         <div class="reveal"><button type="submit" class="btn-submit">Enviar mensagem</button></div>
       </form>
+
       <div class="form-success" id="formSuccess">
         <div class="check">✓</div>
         <strong style="color:var(--white);font-family:var(--font-display);font-size:1.3rem;">Mensagem enviada!</strong>
@@ -227,12 +363,29 @@
     </div>
   </section>
 
+
+  <!-- BANNER DE PRÊMIOS — tamanho controlado por --banner-max-width em :root -->
+  <section id="premios">
+    <img
+      src="https://github.com/catskilltrader/Landingrdias3/blob/main/Banner%20Premios%201.png?raw=true"
+      alt="Prêmios do escritório Rafael Dias"
+    />
+  </section>
+
+
+  <!-- FOOTER -->
   <footer>
     <div class="footer-logo">Rafael <span>Dias</span></div>
-    <p class="footer-legal">© Rafael Dias Assessoria Privada de Investimentos. Todos os direitos reservados.<br>Assessor de Investimentos autorizado pela CVM. XP Investimentos CCTVM S/A.</p>
+    <p class="footer-legal">
+      © Rafael Dias Assessoria Privada de Investimentos. Todos os direitos reservados.<br>
+      Assessor de Investimentos autorizado pela CVM. XP Investimentos CCTVM S/A.
+    </p>
   </footer>
 
+
+  <!-- JAVASCRIPT -->
   <script>
+    // FAQ
     document.querySelectorAll('.faq-question').forEach(btn => {
       btn.addEventListener('click', () => {
         const item = btn.closest('.faq-item');
@@ -242,16 +395,18 @@
       });
     });
 
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-    }, { threshold: 0.12 });
-
+    // Scroll Reveal
+    const observer = new IntersectionObserver(
+      entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }); },
+      { threshold: 0.12 }
+    );
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     document.querySelectorAll('.feature-item').forEach((el, i) => {
       el.style.transitionDelay = `${i * 60}ms`;
       observer.observe(el);
     });
 
+    // Formulário
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
       this.style.display = 'none';
