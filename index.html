@@ -1,635 +1,263 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assessoria Privada XP - Rafael Dias</title>
-    
-    <!-- Google tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17457127974"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'AW-17457127974');
-    </script>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #0F172A;
-            --secondary: #3B82F6;
-            --accent: #10B981;
-            --light: #F8FAFC;
-            --dark: #020617;
-            --gray: #64748B;
-            --bg-color: #F1F5F9;
-            --card-bg: #FFFFFF;
-            --success: #10B981;
-            --logo-scale: 0.3; /* Variável para controle de tamanho da logo - ajuste este valor conforme necessário */
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            background-color: var(--bg-color);
-            color: var(--dark);
-            line-height: 1.7;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 400;
-        }
-        
-        .logo-container {
-            text-align: center;
-            padding: 0.5rem 0 0;
-        }
-        
-        .logo {
-            width: calc(300px * var(--logo-scale)); /* 30% do tamanho original */
-            max-width: 90px; /* 300px * 0.3 = 90px */
-            height: auto;
-        }
-        
-        header {
-            background: linear-gradient(135deg, var(--primary), #1E293B);
-            color: white;
-            padding: 0.5rem 0 2rem;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-        }
-        
-        h1 {
-            font-size: 2.8rem;
-            margin: 0.8rem 0 1rem;
-            background: linear-gradient(to right, #FFFFFF, #E0F2FE);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-        }
-        
-        h2 {
-            font-size: 2.2rem;
-            color: var(--primary);
-            margin: 3rem 0 1.5rem;
-            position: relative;
-            display: inline-block;
-        }
-        
-        h2:after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: var(--accent);
-            border-radius: 2px;
-        }
-        
-        h3 {
-            font-size: 1.5rem;
-            color: var(--secondary);
-            margin: 1.8rem 0 1rem;
-        }
-        
-        .hero {
-            background: linear-gradient(135deg, var(--primary), var(--dark));
-            color: white;
-            padding: 5rem 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero:before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(59,130,246,0.1) 0%, rgba(0,0,0,0) 70%);
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 2.5rem;
-            opacity: 0.9;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--accent);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(16,185,129,0.25);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-        
-        .btn:hover {
-            background-color: #0D9F6E;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(16,185,129,0.3);
-        }
-        
-        .btn i {
-            margin-right: 0.5rem;
-        }
-        
-        section {
-            padding: 4rem 0;
-        }
-        
-        .features {
-            background-color: var(--card-bg);
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-            border-radius: 12px;
-            padding: 3rem;
-            margin-bottom: 3rem;
-            transition: transform 0.3s ease;
-        }
-        
-        .features:hover {
-            transform: translateY(-5px);
-        }
-        
-        .feature-list {
-            list-style-type: none;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        .feature-list li {
-            margin-bottom: 1rem;
-            padding-left: 2.5rem;
-            position: relative;
-            font-size: 1.1rem;
-        }
-        
-        .feature-list li:before {
-            content: '\f00c';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            color: var(--accent);
-            font-size: 1.2rem;
-            position: absolute;
-            left: 0;
-            top: 2px;
-        }
-        
-        /* Destaque para os 3 primeiros diferenciais */
-        .feature-list li:nth-child(-n+3) {
-            font-weight: 600;
-            color: var(--primary);
-        }
-        
-        .form-container {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-            padding: 3rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .form-group {
-            margin-bottom: 1.8rem;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 0.8rem;
-            font-weight: 600;
-            color: var(--primary);
-        }
-        
-        input, select, textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 1px solid #E2E8F0;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background-color: var(--light);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-        
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--secondary);
-            box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
-            background-color: var(--card-bg);
-        }
-        
-        /* Estilos para o FAQ */
-        .faq-item {
-            margin-bottom: 2rem;
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-        
-        .faq-item:hover {
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-        }
-        
-        .faq-question {
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.25rem;
-            display: flex;
-            align-items: center;
-            font-family: 'Playfair Display', serif;
-        }
-        
-        .faq-question:before {
-            content: '\f059';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            color: var(--accent);
-            margin-right: 1rem;
-            font-size: 1.5rem;
-        }
-        
-        /* Estilos para a tabela de preços */
-        .pricing-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            background: var(--card-bg);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-        
-        .pricing-table th {
-            background-color: var(--primary);
-            color: white;
-            padding: 1rem;
-            text-align: left;
-            font-weight: 600;
-        }
-        
-        .pricing-table td {
-            padding: 1rem;
-            border-bottom: 1px solid #F1F5F9;
-        }
-        
-        .pricing-table tr:last-child td {
-            border-bottom: none;
-        }
-        
-        .pricing-table tr:nth-child(even) {
-            background-color: #F8FAFC;
-        }
-        
-        .pricing-table .highlight {
-            font-weight: bold;
-            color: var(--accent);
-        }
-        
-        .disclaimer {
-            font-size: 0.9rem;
-            color: var(--gray);
-            margin-top: 1rem;
-            padding: 0.8rem;
-            background-color: #F8FAFC;
-            border-left: 3px solid var(--accent);
-            border-radius: 0 5px 5px 0;
-        }
-        
-        /* Espaçamento do FAQ */
-        .faq-answer p {
-            margin-bottom: 1rem;
-            line-height: 1.7;
-            color: var(--dark);
-        }
-        
-        .faq-answer p:last-child {
-            margin-bottom: 0;
-        }
-        
-        footer {
-            background-color: var(--primary);
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 3rem;
-        }
-        
-        .footer-logo {
-            width: calc(200px * var(--logo-scale)); /* 30% do tamanho original */
-            max-width: 60px; /* 200px * 0.3 = 60px */
-            margin-bottom: 1rem;
-        }
-        
-        .whatsapp-float {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background-color: #25D366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            box-shadow: 0 4px 6px rgba(37,211,102,0.25);
-            z-index: 100;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-        
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 8px rgba(37,211,102,0.3);
-        }
-        
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            h2 {
-                font-size: 1.8rem;
-            }
-            
-            .logo {
-                width: calc(250px * var(--logo-scale)); /* Ajuste proporcional para mobile */
-                max-width: 75px;
-            }
-            
-            .footer-logo {
-                width: calc(180px * var(--logo-scale)); /* Ajuste proporcional para mobile */
-                max-width: 54px;
-            }
-            
-            .feature-list {
-                grid-template-columns: 1fr;
-            }
-            
-            .features, .form-container {
-                padding: 2rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rafael Dias · Assessoria Privada XP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --border: #222222;
+      --gold: #c9a84c;
+      --gold-soft: rgba(201,168,76,.12);
+      --text: #e8e8e8;
+      --muted: #888888;
+      --white: #ffffff;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body: 'DM Sans', sans-serif;
+      --max-width: 680px;
+      --gap: clamp(4rem, 8vw, 7rem);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-weight: 300; font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
+    .section { padding: var(--gap) 0; }
+    .label { font-family: var(--font-body); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
+    h1, h2, h3 { font-family: var(--font-display); font-weight: 300; line-height: 1.15; }
+    a { color: inherit; text-decoration: none; }
+    .divider { width: 40px; height: 1px; background: var(--gold); margin: 2rem 0; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.2rem 1.5rem; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, rgba(10,10,10,.95), transparent); backdrop-filter: blur(6px); }
+    .nav-logo { font-family: var(--font-display); font-size: 1.05rem; letter-spacing: 0.04em; color: var(--white); }
+    .nav-logo span { color: var(--gold); }
+    .nav-cta { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold); padding: 0.45rem 1rem; border-radius: 2px; transition: background .2s, color .2s; }
+    .nav-cta:hover { background: var(--gold); color: var(--bg); }
+    #hero { min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: clamp(3rem, 8vw, 5rem); padding-top: 6rem; position: relative; overflow: hidden; }
+    #hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(201,168,76,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,.03) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+    #hero::after { content: ''; position: absolute; top: -10%; right: -10%; width: 55vw; height: 55vw; background: radial-gradient(circle, rgba(201,168,76,.07) 0%, transparent 70%); pointer-events: none; }
+    .hero-kicker { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
+    .hero-kicker::before { content: ''; display: inline-block; width: 28px; height: 1px; background: var(--gold); }
+    .hero-title { font-size: clamp(2.8rem, 9vw, 5rem); color: var(--white); margin-bottom: 1.5rem; }
+    .hero-title em { font-style: italic; color: var(--gold); }
+    .hero-sub { color: var(--muted); font-size: 1rem; max-width: 420px; margin-bottom: 2.5rem; line-height: 1.8; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary { display: inline-block; background: var(--gold); color: var(--bg); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.9rem 2rem; border-radius: 2px; transition: opacity .2s, transform .2s; }
+    .btn-primary:hover { opacity: .85; transform: translateY(-1px); }
+    .btn-ghost { display: inline-block; color: var(--muted); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.9rem 0; border-bottom: 1px solid var(--border); transition: color .2s, border-color .2s; }
+    .btn-ghost:hover { color: var(--gold); border-color: var(--gold); }
+    .xp-badge { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--surface); border: 1px solid var(--border); border-radius: 30px; padding: 0.45rem 1rem 0.45rem 0.45rem; font-size: 0.72rem; color: var(--muted); margin-top: 3rem; }
+    .xp-dot { width: 28px; height: 28px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 0.6rem; font-weight: 600; color: var(--bg); letter-spacing: 0.05em; flex-shrink: 0; }
+    #diferenciais { background: var(--surface); }
+    .features-grid { display: flex; flex-direction: column; gap: 0; }
+    .feature-item { display: flex; gap: 1.2rem; align-items: flex-start; padding: 1.4rem 0; border-bottom: 1px solid var(--border); opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; }
+    .feature-item.visible { opacity: 1; transform: none; }
+    .feature-item:last-child { border-bottom: none; }
+    .feature-num { font-family: var(--font-display); font-size: 0.75rem; color: var(--gold); min-width: 28px; padding-top: 0.15rem; font-weight: 300; }
+    .feature-text { font-size: 0.92rem; color: var(--text); line-height: 1.6; }
+    #taxas h2 { font-size: clamp(1.8rem, 6vw, 2.8rem); margin-bottom: 0.5rem; }
+    .taxas-intro { color: var(--muted); font-size: 0.9rem; margin-bottom: 2.5rem; }
+    .taxa-card { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 0.8rem; }
+    .taxa-row { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.2rem; border-bottom: 1px solid var(--border); font-size: 0.88rem; }
+    .taxa-row:last-child { border-bottom: none; }
+    .taxa-row.highlight { background: var(--gold-soft); }
+    .taxa-faixa { color: var(--muted); }
+    .taxa-valor { font-weight: 500; color: var(--gold); font-family: var(--font-display); font-size: 1rem; }
+    .cashback-note { font-size: 0.8rem; color: var(--muted); border-left: 2px solid var(--gold); padding-left: 1rem; margin-top: 1.5rem; line-height: 1.6; }
+    #faq h2 { font-size: clamp(1.8rem, 6vw, 2.8rem); margin-bottom: 2.5rem; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-question { width: 100%; background: none; border: none; text-align: left; color: var(--text); font-family: var(--font-body); font-size: 0.92rem; font-weight: 400; padding: 1.2rem 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+    .faq-question:hover { color: var(--gold); }
+    .faq-icon { width: 18px; height: 18px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform .3s, border-color .3s; font-size: 0.75rem; color: var(--gold); }
+    .faq-item.open .faq-icon { transform: rotate(45deg); border-color: var(--gold); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height .4s ease; }
+    .faq-item.open .faq-answer { max-height: 600px; }
+    .faq-answer-inner { padding-bottom: 1.2rem; font-size: 0.88rem; color: var(--muted); line-height: 1.8; }
+    .steps { list-style: none; margin-top: 0.5rem; }
+    .steps li { display: flex; gap: 0.8rem; margin-bottom: 0.5rem; }
+    .step-num { color: var(--gold); font-family: var(--font-display); font-size: 0.8rem; min-width: 20px; }
+    #contato { background: var(--surface); }
+    #contato h2 { font-size: clamp(1.8rem, 6vw, 2.8rem); margin-bottom: 0.5rem; }
+    .contact-sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 2.5rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+    .form-group input, .form-group select { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 2px; color: var(--text); font-family: var(--font-body); font-size: 0.9rem; font-weight: 300; padding: 0.85rem 1rem; outline: none; transition: border-color .2s; -webkit-appearance: none; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--gold); }
+    .form-group select option { background: #111; }
+    .btn-submit { width: 100%; background: var(--gold); color: var(--bg); font-family: var(--font-body); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; border: none; border-radius: 2px; padding: 1rem; cursor: pointer; margin-top: 0.5rem; transition: opacity .2s, transform .2s; }
+    .btn-submit:hover { opacity: .85; transform: translateY(-1px); }
+    .form-success { display: none; text-align: center; padding: 2rem 0; }
+    .form-success .check { width: 48px; height: 48px; border-radius: 50%; background: var(--gold-soft); border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.2rem; color: var(--gold); }
+    footer { padding: 3rem 1.5rem; text-align: center; border-top: 1px solid var(--border); }
+    .footer-logo { font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--white); }
+    .footer-logo span { color: var(--gold); }
+    .footer-legal { font-size: 0.72rem; color: var(--muted); line-height: 1.8; max-width: 420px; margin: 0.5rem auto 0; }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="logo-container">
-                <!-- Logo com 30% do tamanho original - ajuste a variável --logo-scale no CSS para alterar -->
-                <img src="https://github.com/catskilltrader/Landingrdias3/blob/main/XP-Investimentos-Bolacha-Negativo-1.png?raw=true" alt="XP Investimentos - Rafael Dias" class="logo">
-            </div>
-            <h1>Assessoria Privada XP - Rafael Dias</h1>
-            <p>Estratégias sob medida para seus objetivos</p>
-        </div>
-    </header>
-    
-    <section class="hero">
-        <div class="container">
-            <h2>Invista com quem pensa diferente</h2>
-            <p>Nossa assessoria oferece soluções personalizadas, sem conflitos de interesse e com transparência total em todas as operações.</p>
-            <a href="#contact" class="btn"><i class="fas fa-arrow-down"></i> Fale conosco</a>
-        </div>
-    </section>
-    
-    <section class="container">
-        <div class="features">
-            <h2>Nossos Diferenciais</h2>
-            <ul class="feature-list">
-                <li>Carteira de Investimentos e Planejamento Personalizado</li>
-                <li>Zero Conflito de Interesses</li>
-                <li>Hub de soluções completo: Aposentadoria, Blindagem Patrimonial, Planejamento na Aquisição de Bens, Eficiência Tributária</li>
-                <li>Acompanhamento Mensal com Relatório Detalhado</li>
-                <li>Acesso às melhores taxas de Renda Fixa do Brasil</li>
-                <li>Acesso exclusivo à cursos e treinamentos sobre mercado</li>
-                <li>Investimentos Internacionais e Criptomoedas</li>
-                <li>Desconto na corretagem para negociação em bolsa</li>
-                <li>Somos um dos maiores escritórios privado da XP, com mais de 30 Bilhões sob gestão.</li>
-            </ul>
-        </div>
-    </section>
-    
-    <section id="contact" class="container">
-        <h2>Entre em Contato</h2>
-        <div class="form-container">
-            <form id="contactForm" action="https://formsubmit.co/rdias.contatoinvest@gmail.com" method="POST">
-                <input type="hidden" name="_subject" value="Novo contato - Assessoria Privada">
-                <input type="hidden" name="_next" value="https://seusite.com/obrigado.html">
-                
-                <div class="form-group">
-                    <label for="name">Nome:</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="profession">Profissão:</label>
-                    <input type="text" id="profession" name="profession" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="investment">Faixa de Investimentos:</label>
-                    <select id="investment" name="investment" required>
-                        <option value="" disabled selected>Selecione uma opção</option>
-                       <option value="Até 100k">Até 100k</option>  
-                      <option value="e 100k à 3MM">De 100k à 300k</option>
-                        <option value="De 3MM à 7MM">De 300k à 5 Milhões </option>
-                        <option value="7MM +">Acima de 5 Milhões</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="phone">Número para contato (WhatsApp):</label>
-                    <input type="tel" id="phone" name="phone" placeholder="(XX) XXXXX-XXXX" required>
-                </div>
-                
-                <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Enviar</button>
-            </form>
-        </div>
-    </section>
-    
-    <section class="container">
-        <h2>Perguntas Frequentes</h2>
-        
-        <div class="faq-item">
-            <div class="faq-question">Quanto custa?</div>
-            <div class="faq-answer">
-                <p>A partir de 0,8% ao ano para a faixa Exclusive, e 1,25% para a faixa Standard.</p>
-                <p>Sua taxa de gestão diminui a cada nova faixa de patrimônio alcançada.</p>
-                
-                <table class="pricing-table">
-                    <thead>
-                        <tr>
-                            <th>Faixa de Patrimônio</th>
-                            <th>Taxa de Gestão</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Até 100k Investidos</td>
-                            <td class="highlight">1,25% ao ano</td>
-                        </tr>
-                        <tr>
-                            <tr>
-                            <td>100k à 300k Investidos </td>
-                            <td class="highlight">1% ao ano</td>
-                        </tr>
-                        <tr>
-                          <td>De 300k à 1 Milhão Investidos </td>
-                            <td class="highlight">0,8% ao ano</td>
-                           </tr>
-                        <tr>
-                          <td>De 1 à 5 Milhões Investidos</td>
-                            <td class="highlight">0,7% ao ano </td>
-                        </tr>
-                        <tr>
-                            <td>De 5 à 10 Milhões Investidos</td>
-                            <td class="highlight">0,6% ao ano</td>
-                        </tr>
-</tr>
-                        <tr>
-                            <td>Acima de 10 Milhões (XP Private)</td>
-                            <td class="highlight">0,5% ao ano</td>
-                        </tr>
-                    </tbody>
-                </table>
-                
-                <div class="disclaimer">
-                    Plus: Comissões embutidas nos produtos voltam automaticamente para você como cashback.
-                </div>
-            </div>
-        </div>
-        
-        <div class="faq-item">
-            <div class="faq-question">Como é pago?</div>
-            <div class="faq-answer">
-                <p>Diretamente do retorno da carteira.</p>
-            </div>
-        </div>
-   
-            </div>
-        </div>
-        
-        <div class="faq-item">
-            <div class="faq-question">Tem carência? Posso cancelar?</div>
-            <div class="faq-answer">
-                <p>Nao há carência, podendo cancelar o serviço à qualquer momento.</p>
-            </div>
-        </div>
-        
-        <div class="faq-item">
-            <div class="faq-question">Quem é o assessor responsável?</div>
-            <div class="faq-answer">
-                <p>Rafael Dias é graduado pela Universidade Federal de Lavras e MBA em Investimentos & Private Banking pelo IBMEC. Além disso, é Especialista em Investimentos credenciado (CEA) e Assessor de Investimentos autorizado pela CVM para atuar no mercado de capitais como profissional.</p>
-                <p>Todo o trabalho é desenvolvido em equipe, em linha com outros excelentes profissionais devidamente autorizados com vasta experiência de mercado nas áreas de planejamento financeiro pessoal e familiar.</p>
-            </div>
-        </div>
-        
-        <div class="faq-item">
-            <div class="faq-question">Preciso ter conta na XP?</div>
-            <div class="faq-answer">
-                <p>Sim, pois atendo clientes exclusivamente da corretora. Caso ainda não tenha conta na XP, entre em contato pelo formulário para criar sua conta diretamente com nossa assessoria.</p>
-            </div>
-        </div>
-        
-        <div class="faq-item">
-            <div class="faq-question">Como entro para a Assessoria Privada?</div>
-            <div class="faq-answer">
-                <p>1 - Preencha o formulário de contato para validarmos seu interesse.</p>
-                <p>2 - Entraremos em contato para uma reunião de diagnóstico, sem custos.</p>
-                <p>3 - Apresentamos um planejamento personalizado para seu momento de vida e objetivos futuros.</p>
-                <p>4 - Troca da Assessoria pelo site da XP, apresentação da plataforma e aplicações.</p>
-                <p>5 - Acompanhamento: Você receberá mensalmente um relatório completo da sua carteira, com as sugestões para o próximo mês, além de materiais de estudo e atualizações de mercado. Enquanto isso, permanecerei disponível para atendimento direto e privado, junto à nossa equipe de especialistas e consultores.</p>
-            </div>
-        </div>
-    </section>
-    
-    <footer>
-        <div class="container">
-            <!-- Logo com 30% do tamanho original - ajuste a variável --logo-scale no CSS para alterar -->
-            <img src="https://github.com/catskilltrader/Landingrdias3/blob/main/XP-Investimentos-Bolacha-Negativo-1.png?raw=true" alt="XP Investimentos - Rafael Dias" class="footer-logo">
-            <p>&copy; Rafael Dias Assessoria Privada de Investimentos. Todos os direitos reservados.</p>
-        </div>
-    </footer>
-    
-    <a href="https://wa.me/5532984055348" class="whatsapp-float">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-    
-    <script>
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Validação simples
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            
-            if(name && email && phone) {
-                // Se todos os campos obrigatórios estiverem preenchidos, envia o formulário
-                this.submit();
-                
-                // Feedback visual (opcional)
-                alert('Formulário enviado com sucesso! Entraremos em contato em breve.');
-                this.reset();
-            } else {
-                alert('Por favor, preencha todos os campos obrigatórios.');
-            }
-        });
 
-        // Máscara para telefone (DDD) automático
-        document.getElementById('phone').addEventListener('input', function(e) {
-            let value = this.value.replace(/\D/g, '');
-            
-            if (value.length > 2) {
-                value = '(' + value.substring(0, 2) + ') ' + value.substring(2);
-            }
-            
-            if (value.length > 10) {
-                value = value.substring(0, 10) + '-' + value.substring(10);
-            }
-            
-            this.value = value.substring(0, 15);
-        });
-    </script>
+  <nav>
+    <div class="nav-logo">Rafael <span>Dias</span></div>
+    <a href="#contato" class="nav-cta">Fale conosco</a>
+  </nav>
+
+  <section id="hero">
+    <div class="container">
+      <div class="hero-kicker">Assessoria Privada XP</div>
+      <h1 class="hero-title">Invista com quem<br>pensa <em>diferente.</em></h1>
+      <p class="hero-sub">Estratégias sob medida, sem conflitos de interesse e com transparência total em cada decisão.</p>
+      <div class="hero-actions">
+        <a href="#contato" class="btn-primary">Quero ser atendido</a>
+        <a href="#diferenciais" class="btn-ghost">Ver diferenciais</a>
+      </div>
+      <div class="xp-badge">
+        <div class="xp-dot">XP</div>
+        Um dos maiores escritórios privados da XP · +R$30 Bi sob gestão
+      </div>
+    </div>
+  </section>
+
+  <section id="diferenciais" class="section">
+    <div class="container">
+      <div class="label reveal">O que você recebe</div>
+      <h2 style="font-size:clamp(1.8rem,6vw,2.8rem);margin-bottom:0.4rem;" class="reveal">Tudo que um investidor<br>de alta performance precisa.</h2>
+      <div class="divider reveal"></div>
+      <ul class="features-grid" style="list-style:none;margin-top:1rem;">
+        <li class="feature-item"><span class="feature-num">01</span><span class="feature-text">Carteira de investimentos e planejamento totalmente personalizado</span></li>
+        <li class="feature-item"><span class="feature-num">02</span><span class="feature-text">Zero conflito de interesses — sempre ao seu lado</span></li>
+        <li class="feature-item"><span class="feature-num">03</span><span class="feature-text">Hub completo: aposentadoria, blindagem patrimonial, planejamento de aquisição de bens e eficiência tributária</span></li>
+        <li class="feature-item"><span class="feature-num">04</span><span class="feature-text">Acompanhamento mensal com relatório detalhado da carteira</span></li>
+        <li class="feature-item"><span class="feature-num">05</span><span class="feature-text">Acesso às melhores taxas de renda fixa do Brasil</span></li>
+        <li class="feature-item"><span class="feature-num">06</span><span class="feature-text">Cursos e treinamentos exclusivos sobre o mercado financeiro</span></li>
+        <li class="feature-item"><span class="feature-num">07</span><span class="feature-text">Investimentos internacionais e criptomoedas</span></li>
+        <li class="feature-item"><span class="feature-num">08</span><span class="feature-text">Desconto na corretagem para negociação em bolsa</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="taxas" class="section">
+    <div class="container">
+      <div class="label reveal">Transparência total</div>
+      <h2 class="reveal">Taxas que diminuem<br>conforme você cresce.</h2>
+      <div class="divider reveal"></div>
+      <p class="taxas-intro reveal">A taxa de gestão cai progressivamente a cada nova faixa de patrimônio atingida.</p>
+      <div class="taxa-card reveal">
+        <div class="taxa-row"><span class="taxa-faixa">Até R$ 100 mil</span><span class="taxa-valor">1,25% a.a.</span></div>
+        <div class="taxa-row"><span class="taxa-faixa">R$ 100k – R$ 300k</span><span class="taxa-valor">1,00% a.a.</span></div>
+        <div class="taxa-row"><span class="taxa-faixa">R$ 300k – R$ 1 milhão</span><span class="taxa-valor">0,80% a.a.</span></div>
+        <div class="taxa-row"><span class="taxa-faixa">R$ 1 M – R$ 5 milhões</span><span class="taxa-valor">0,70% a.a.</span></div>
+        <div class="taxa-row"><span class="taxa-faixa">R$ 5 M – R$ 10 milhões</span><span class="taxa-valor">0,60% a.a.</span></div>
+        <div class="taxa-row highlight"><span class="taxa-faixa">Acima de R$ 10 milhões (XP Private)</span><span class="taxa-valor">0,50% a.a.</span></div>
+      </div>
+      <p class="cashback-note reveal"><strong style="color:var(--text);">Cashback automático:</strong> comissões embutidas nos produtos retornam diretamente para você. A taxa é descontada do retorno da carteira — sem custo adicional.</p>
+    </div>
+  </section>
+
+  <section id="faq" class="section" style="background:var(--surface);">
+    <div class="container">
+      <div class="label reveal">Dúvidas frequentes</div>
+      <h2 class="reveal">Perguntas<br>frequentes.</h2>
+      <div class="divider reveal"></div>
+      <div class="faq-item">
+        <button class="faq-question">Como é cobrado o serviço?<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">A taxa é descontada diretamente do retorno da carteira, sem nenhum custo adicional ao bolso. Não há carência — você pode cancelar o serviço a qualquer momento, sem burocracia.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Tem carência? Posso cancelar?<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">Não há carência. Você pode cancelar o serviço a qualquer momento, sem multas ou burocracia.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Quem é o assessor responsável?<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner"><strong style="color:var(--text);">Rafael Dias</strong> é graduado pela Universidade Federal de Lavras, com MBA em Investimentos & Private Banking pelo IBMEC. É Especialista em Investimentos credenciado (CEA) e Assessor de Investimentos autorizado pela CVM.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Preciso ter conta na XP?<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">Sim. O atendimento é exclusivo para clientes da XP Investimentos. Caso ainda não tenha conta, entre em contato pelo formulário abaixo — abriremos sua conta diretamente pela nossa assessoria.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Como entro para a Assessoria Privada?<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <ul class="steps">
+            <li><span class="step-num">1.</span><span>Preencha o formulário de contato.</span></li>
+            <li><span class="step-num">2.</span><span>Entramos em contato para uma reunião de diagnóstico gratuita.</span></li>
+            <li><span class="step-num">3.</span><span>Apresentamos um planejamento personalizado para seus objetivos.</span></li>
+            <li><span class="step-num">4.</span><span>Troca da assessoria pelo site da XP e apresentação da plataforma.</span></li>
+            <li><span class="step-num">5.</span><span>Acompanhamento mensal com relatório completo e acesso direto à equipe.</span></li>
+          </ul>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato" class="section">
+    <div class="container">
+      <div class="label reveal">Primeiro passo</div>
+      <h2 class="reveal">Vamos conversar<br>sobre o seu patrimônio.</h2>
+      <div class="divider reveal"></div>
+      <p class="contact-sub reveal">Preencha os dados abaixo e entraremos em contato para uma reunião de diagnóstico, sem custos.</p>
+      <form id="contactForm">
+        <div class="form-group reveal"><label for="nome">Nome completo</label><input type="text" id="nome" name="nome" placeholder="Seu nome" required /></div>
+        <div class="form-group reveal"><label for="profissao">Profissão</label><input type="text" id="profissao" name="profissao" placeholder="Sua profissão" /></div>
+        <div class="form-group reveal">
+          <label for="faixa">Faixa de investimentos</label>
+          <select id="faixa" name="faixa" required>
+            <option value="" disabled selected>Selecione uma faixa de patrimônio</option>
+            <option>Até R$ 100 mil</option>
+            <option>De R$ 100 mil a R$ 300 mil</option>
+            <option>De R$ 300 mil a R$ 1 milhão</option>
+            <option>De R$ 1 a R$ 5 milhões</option>
+            <option>De R$ 5 a R$ 10 milhões</option>
+             <option>Acima de R$ 10 milhões</option>
+          </select>
+        </div>
+        <div class="form-group reveal"><label for="email">E-mail</label><input type="email" id="email" name="email" placeholder="seu@email.com" required /></div>
+        <div class="form-group reveal"><label for="whatsapp">WhatsApp</label><input type="tel" id="whatsapp" name="whatsapp" placeholder="(00) 00000-0000" required /></div>
+        <div class="reveal"><button type="submit" class="btn-submit">Enviar mensagem</button></div>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <div class="check">✓</div>
+        <strong style="color:var(--white);font-family:var(--font-display);font-size:1.3rem;">Mensagem enviada!</strong>
+        <p style="margin-top:.5rem;">Entraremos em contato em breve pelo WhatsApp ou e-mail informado.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Rafael <span>Dias</span></div>
+    <p class="footer-legal">© Rafael Dias Assessoria Privada de Investimentos. Todos os direitos reservados.<br>Assessor de Investimentos autorizado pela CVM. XP Investimentos CCTVM S/A.</p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.feature-item').forEach((el, i) => {
+      el.style.transitionDelay = `${i * 60}ms`;
+      observer.observe(el);
+    });
+
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      this.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    });
+  </script>
+
 </body>
 </html>
