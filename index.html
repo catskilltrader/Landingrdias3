@@ -30,8 +30,8 @@
       /* =============================================
          TAMANHOS AJUSTÁVEIS — edite aqui
          ============================================= */
-      --selo-size: 237px;       /* largura do selo no hero */
-      --banner-max-width:30%; /* largura máxima do banner de prêmios:
+      --selo-size: 230px;       /* largura do selo no hero */
+      --banner-max-width:50%; /* largura máxima do banner de prêmios:
                                    use % para relativo à tela,
                                    ou px para fixo, ex: 900px */
     }
@@ -337,7 +337,7 @@
       <div class="divider reveal"></div>
       <p class="contact-sub reveal">Preencha os dados abaixo e entraremos em contato para uma reunião de diagnóstico, sem custos.</p>
 
-      <form id="contactForm">
+      <form id="contactForm" action="https://formspree.io/f/myknnvqj" method="POST">
         <div class="form-group reveal"><label for="nome">Nome completo</label><input type="text" id="nome" name="nome" placeholder="Seu nome" required /></div>
         <div class="form-group reveal"><label for="profissao">Profissão</label><input type="text" id="profissao" name="profissao" placeholder="Sua profissão" /></div>
         <div class="form-group reveal">
@@ -406,12 +406,27 @@
       observer.observe(el);
     });
 
-    // Formulário
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      this.style.display = 'none';
+    // Formulário — envio via Formspree
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const form = this;
+  const data = new FormData(form);
+
+  fetch(form.action, {
+    method: 'POST',
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  })
+  .then(res => {
+    if (res.ok) {
+      form.style.display = 'none';
       document.getElementById('formSuccess').style.display = 'block';
-    });
+    } else {
+      alert('Erro ao enviar. Tente novamente.');
+    }
+  })
+  .catch(() => alert('Erro de conexão. Tente novamente.'));
+});
   </script>
 
 </body>
